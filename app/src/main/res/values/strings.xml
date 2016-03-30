@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Share Multimedia App</string>
+    <string name="action_settings">Settings</string>
+    <string name="save_contact">SAVE CONTACT</string>
+    <string name="userName">Name</string>
+    <string name="usernameInput">Name</string>
+    <string name="userPhone">Phone</string>
+    <string name="userphoneinput">Phone Number</string>
+    <string name="userEmail">Email</string>
+    <string name="useremailInput">Email Adress</string>
+    <string name="userAddress">Address</string>
+    <string name="useraddressInput">Home Address</string>
+    <string name="userNickname">Nickname</string>
+    <string name="usernicknameInput">Nickname</string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
+    <string name="Add_New">Add_New</string>
+
+    <string name="title_activity_display_contact">DisplayContact</string>
+    <string name="save">Save Contact</string>
+    <string name="deleteContact">Are you sure, you want to delete it.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="share">Share</string>
+    <string name="gallery">Gallery</string>
+    <string name="share_photo">Share</string>
+    <string name="camera">Camera</string>
+    <string name="image_photo">Image</string>
+</resources>

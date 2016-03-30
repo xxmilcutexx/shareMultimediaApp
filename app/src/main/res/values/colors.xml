@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <item name="blue" type="color">#FF33B5E5</item>
+    <item name="purple" type="color">#FFAA66CC</item>
+    <item name="green" type="color">#FF99CC00</item>
+    <item name="orange" type="color">#FFFFBB33</item>
+    <item name="red" type="color">#FFFF4444</item>
+    <item name="darkblue" type="color">#FF0099CC</item>
+    <item name="darkpurple" type="color">#FF9933CC</item>
+    <item name="darkgreen" type="color">#FF669900</item>
+    <item name="darkorange" type="color">#FFFF8800</item>
+    <item name="darkred" type="color">#FFCC0000</item>
+
+    <item name="light_blue" type="color">#39add1</item>
+    <item name="dark_blue" type="color">#3079ab</item>
+    <item name="mauve" type="color">#c25975</item>
+    <item name="bright_red" type="color">#e15258</item>
+    <item name="light_orange" type="color">#f9845b</item>
+    <item name="lavender" type="color">#838cc7</item>
+    <item name="light_purple" type="color">#7d669e</item>
+    <item name="aqua" type="color">#53bbb4</item>
+    <item name="mustard" type="color">#e0ab18</item>
+    <item name="dark_gray" type="color">#637a91</item>
+    <item name="pink" type="color">#f092b0</item>
+    <item name="light_gray" type="color"> #b7c0c7</item>
+
+    <integer-array name="androidcolors">
+        <item>@color/blue</item>
+        <item>@color/purple</item>
+        <item>@color/green</item>
+        <item>@color/orange</item>
+        <item>@color/red</item>
+        <item>@color/darkblue</item>
+        <item>@color/darkpurple</item>
+        <item>@color/darkgreen</item>
+        <item>@color/darkorange</item>
+        <item>@color/darkred</item>
+
+        <item>@color/light_blue</item>
+        <item>@color/dark_blue</item>
+        <item>@color/mauve</item>
+        <item>@color/bright_red</item>
+        <item>@color/light_orange</item>
+        <item>@color/lavender</item>
+        <item>@color/light_purple</item>
+        <item>@color/aqua</item>
+        <item>@color/mustard</item>
+        <item>@color/dark_gray</item>
+        <item>@color/pink</item>
+        <item>@color/light_gray</item>
+    </integer-array>
+
+</resources>
