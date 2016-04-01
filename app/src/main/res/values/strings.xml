@@ -26,4 +26,6 @@
     <string name="share_photo">Share</string>
     <string name="camera">Camera</string>
     <string name="image_photo">Image</string>
+    <string name="phoneBook">Phone Book Database</string>
+    <string name="pb_logo">phoneBookLogo</string>
 </resources>

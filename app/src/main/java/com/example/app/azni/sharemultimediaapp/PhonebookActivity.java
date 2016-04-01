@@ -1,38 +1,26 @@
 package com.example.app.azni.sharemultimediaapp;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Bundle;
-
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PhonebookActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "MESSAGE";
-    private ListView obj;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 201;
     DBHelper mydb;
     Button btnMessage, btnCall, btnShare, btnAdd;
-
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 201;
+    private ListView obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +28,7 @@ public class PhonebookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_displaycontact);
 
         mydb = new DBHelper(this);
-        ArrayList array_list = mydb.getAllCotacts();
+        ArrayList array_list = mydb.getAllContacts();
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array_list);
 
         obj = (ListView) findViewById(R.id.listView1);
@@ -95,18 +83,7 @@ public class PhonebookActivity extends AppCompatActivity {
     }
 
 
-    public void message(View v)
-    {
-        String number = "100";
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("smsto:" + number));
-        intent.putExtra("sms_body", "The sms text");
-        startActivity(intent);
-    }
-
     //call method
-
-
 
 
 //

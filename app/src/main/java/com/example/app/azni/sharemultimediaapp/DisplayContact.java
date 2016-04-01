@@ -1,20 +1,13 @@
 package com.example.app.azni.sharemultimediaapp;
 
-//import android.Manifest;
-//import android.content.pm.PackageManager;
-//import android.net.Uri;
 import android.Manifest;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Bundle;
-//import android.app.Activity;
 import android.app.AlertDialog;
-
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
-
-//import android.support.v4.app.ActivityCompat;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,17 +15,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.util.Date;
+
+
 public class DisplayContact extends AppCompatActivity {
-//    int from_Where_I_Am_Coming = 0;
-    private DBHelper mydb;
     TextView name, phone, email, address, nickname;
     int id_To_Update = 0;
-
+//    CharSequence cDate = DateFormat.getDateTimeInstance().format(new Date());
+    //    int from_Where_I_Am_Coming = 0;
+    private DBHelper mydb;
+    CharSequence time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +41,7 @@ public class DisplayContact extends AppCompatActivity {
         email = (TextView) findViewById(R.id.emailID);
         address = (TextView) findViewById(R.id.addressID);
         nickname = (TextView) findViewById(R.id.nicknameID);
+        time  = DateFormat.getDateTimeInstance().format(new Date());
 
         mydb = new DBHelper(this);
 
@@ -70,8 +68,6 @@ public class DisplayContact extends AppCompatActivity {
 
                     Log.d("!rsClosed!!!", "");
                 }
-                Button b = (Button) findViewById(R.id.saveButton);
-                b.setVisibility(View.INVISIBLE);
 
                 name.setText((CharSequence) nam);
                 name.setFocusable(false);
@@ -92,6 +88,38 @@ public class DisplayContact extends AppCompatActivity {
                 nickname.setText((CharSequence) nickna);
                 nickname.setFocusable(false);
                 nickname.setClickable(false);
+
+                Button b = (Button) findViewById(R.id.saveButton);
+                b.setVisibility(View.INVISIBLE);
+
+                //                set button invisible
+                //read button's id
+                Button bcall = (Button) findViewById(R.id.buttonCall);
+                bcall.setVisibility(View.VISIBLE);
+                Button bmessage = (Button) findViewById(R.id.buttonMessage);
+                bmessage.setVisibility(View.VISIBLE);
+                Button bshare = (Button) findViewById(R.id.buttonShare);
+                bshare.setVisibility(View.VISIBLE);
+                Button badd = (Button) findViewById(R.id.buttonAdd);
+                badd.setEnabled(false);
+
+                // TODO Message & Call Function by ID
+
+//                Time time = new Time();
+//                time.setToNow();
+//
+// String time = new SimpleDateFormat().format(new Date());
+//
+//                CharSequence cDate = DateFormat.getDateTimeInstance().format(new Date());
+
+//                Calendar c = Calendar.getInstance();
+//                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss a");
+//                String time = sdf.format(c.getTime());
+
+//                Toast.makeText(DisplayContact.this, "current time: " + time, Toast.LENGTH_SHORT).show();
+
+//                Toast.makeText(DisplayContact.this, "current contact number:" + " " + phon, Toast.LENGTH_SHORT).show();
+
             }
         }
     }
@@ -116,8 +144,22 @@ public class DisplayContact extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.Edit_Contact:
+
                 Button b = (Button) findViewById(R.id.saveButton);
                 b.setVisibility(View.VISIBLE);
+
+//                set button invisible
+                //read button's id
+                Button bcall = (Button) findViewById(R.id.buttonCall);
+                bcall.setVisibility(View.INVISIBLE);
+                Button bmessage = (Button) findViewById(R.id.buttonMessage);
+                bmessage.setVisibility(View.INVISIBLE);
+                Button bshare = (Button) findViewById(R.id.buttonShare);
+                bshare.setVisibility(View.INVISIBLE);
+                Button badd = (Button) findViewById(R.id.buttonAdd);
+                badd.setVisibility(View.INVISIBLE);
+
+
                 name.setEnabled(true);
                 name.setFocusableInTouchMode(true);
                 name.setClickable(true);
@@ -174,7 +216,8 @@ public class DisplayContact extends AppCompatActivity {
             if (Value > 0) {
                 if (mydb.updateContact(id_To_Update, name.getText().toString(),
                         phone.getText().toString(), email.getText().toString(),
-                        address.getText().toString(), nickname.getText().toString())) {
+                        address.getText().toString(), nickname.getText().toString(),
+                        time.toString())) {
                     Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), PhonebookActivity.class);
                     startActivity(intent);
@@ -184,7 +227,7 @@ public class DisplayContact extends AppCompatActivity {
             } else {
                 if (mydb.insertContact(name.getText().toString(), phone.getText().toString(),
                         email.getText().toString(), address.getText().toString(),
-                        nickname.getText().toString())) {
+                        nickname.getText().toString(), time.toString())) {
                     Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "not done", Toast.LENGTH_SHORT).show();
@@ -209,5 +252,16 @@ public class DisplayContact extends AppCompatActivity {
         }
         startActivity(intent);
 //        Log.d("Invoke call maethod", "entered!!");
+    }
+
+    //message method
+    public void message(View v) {
+        //get v
+//        Toast.makeText(DisplayContact.this, "value of v: " + " " + v, Toast.LENGTH_SHORT).show();
+        String number = "100";
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("smsto:" + number));
+        intent.putExtra("sms_body", "The sms text");
+        startActivity(intent);
     }
 }

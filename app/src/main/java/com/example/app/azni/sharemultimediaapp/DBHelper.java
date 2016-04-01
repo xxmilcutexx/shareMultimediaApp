@@ -1,19 +1,21 @@
 package com.example.app.azni.sharemultimediaapp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "MyDBName.db";
+    public static final String DATABASE_NAME = "TestDB.db";
     public static final String CONTACTS_TABLE_NAME = "contacts";
     public static final String CONTACTS_COLUMN_ID = "id";
     public static final String CONTACTS_COLUMN_NAME = "name";
@@ -21,6 +23,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CONTACTS_COLUMN_EMAIL = "email";
     public static final String CONTACTS_COLUMN_ADDRESS = "address";
     public static final String CONTACTS_COLUMN_NICKNAME= "nickname";
+    public static final String CONTACTS_COLUMN_TIME= "time";
+
     private HashMap hp;
 
     public DBHelper(Context context) {
@@ -29,21 +33,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // TODO Auto-generated method stub
+
         db.execSQL(
                 "create table contacts " +
-                        "(id integer primary key, name text,phone text,email text, address text,nickname text)"
+                        "(id integer primary key, name text,phone text,email text, address text,nickname text, time text)"
         );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO Auto-generated method stub
+
         db.execSQL("DROP TABLE IF EXISTS contacts");
         onCreate(db);
     }
 
-    public boolean insertContact(String name, String phone, String email, String address, String nickname) {
+    public boolean insertContact(String name, String phone, String email, String address, String nickname, String time) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -51,6 +55,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("email", email);
         contentValues.put("address", address);
         contentValues.put("nickname", nickname);
+        contentValues.put("time", time);
         db.insert("contacts", null, contentValues);
         return true;
     }
@@ -67,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateContact(Integer id, String name, String phone, String email, String address, String nickname) {
+    public boolean updateContact(Integer id, String name, String phone, String email, String address, String nickname, String time) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -75,6 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("email", email);
         contentValues.put("address", address);
         contentValues.put("nickname", nickname);
+        contentValues.put("time", time);
         db.update("contacts", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
@@ -86,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{Integer.toString(id)});
     }
 
-    public ArrayList<String> getAllCotacts() {
+    public ArrayList<String> getAllContacts() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
