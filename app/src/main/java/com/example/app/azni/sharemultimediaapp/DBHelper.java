@@ -6,15 +6,15 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    //database columns
     public static final String DATABASE_NAME = "TestDB.db";
     public static final String CONTACTS_TABLE_NAME = "contacts";
     public static final String CONTACTS_COLUMN_ID = "id";
@@ -22,8 +22,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CONTACTS_COLUMN_PHONE = "phone";
     public static final String CONTACTS_COLUMN_EMAIL = "email";
     public static final String CONTACTS_COLUMN_ADDRESS = "address";
-    public static final String CONTACTS_COLUMN_NICKNAME= "nickname";
-    public static final String CONTACTS_COLUMN_TIME= "time";
+    public static final String CONTACTS_COLUMN_NICKNAME = "nickname";
+    public static final String CONTACTS_COLUMN_TIME = "time";
 
     private HashMap hp;
 
@@ -93,14 +93,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<String> getAllContacts() {
+
         ArrayList<String> array_list = new ArrayList<String>();
 
-        //hp = new HashMap();
+        hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from contacts", null);
         res.moveToFirst();
 
-        while (res.isAfterLast() == false) {
+        while (!res.isAfterLast()) {
+
             array_list.add(res.getString(res.getColumnIndex(CONTACTS_COLUMN_NAME)));
             res.moveToNext();
         }

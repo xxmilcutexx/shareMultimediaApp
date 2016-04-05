@@ -26,10 +26,10 @@ import java.util.Date;
 public class DisplayContact extends AppCompatActivity {
     TextView name, phone, email, address, nickname;
     int id_To_Update = 0;
-//    CharSequence cDate = DateFormat.getDateTimeInstance().format(new Date());
+    CharSequence time;
+    //    CharSequence cDate = DateFormat.getDateTimeInstance().format(new Date());
     //    int from_Where_I_Am_Coming = 0;
     private DBHelper mydb;
-    CharSequence time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class DisplayContact extends AppCompatActivity {
         email = (TextView) findViewById(R.id.emailID);
         address = (TextView) findViewById(R.id.addressID);
         nickname = (TextView) findViewById(R.id.nicknameID);
-        time  = DateFormat.getDateTimeInstance().format(new Date());
+        time = DateFormat.getDateTimeInstance().format(new Date());
 
         mydb = new DBHelper(this);
 

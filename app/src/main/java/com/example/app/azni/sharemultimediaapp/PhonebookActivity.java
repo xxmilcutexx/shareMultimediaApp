@@ -3,6 +3,7 @@ package com.example.app.azni.sharemultimediaapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,11 +17,12 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class PhonebookActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "MESSAGE";
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 201;
+//    public final static String EXTRA_MESSAGE = "MESSAGE";
+//    final private int REQUEST_CODE_ASK_PERMISSIONS = 201;
     DBHelper mydb;
-    Button btnMessage, btnCall, btnShare, btnAdd;
+//    Button btnMessage, btnCall, btnShare, btnAdd;
     private ListView obj;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +30,16 @@ public class PhonebookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_displaycontact);
 
         mydb = new DBHelper(this);
-        ArrayList array_list = mydb.getAllContacts();
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array_list);
 
-        obj = (ListView) findViewById(R.id.listView1);
-        obj.setAdapter(arrayAdapter);
+
+
+
+        ArrayList array_list = mydb.getAllContacts();
+//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array_list);
+//        obj = (ListView) findViewById(R.id.listView1);
+//        obj.setAdapter(arrayAdapter);
+
+
         obj.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -81,38 +88,4 @@ public class PhonebookActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keycode, event);
     }
-
-
-    //call method
-
-
-//
-//	class btnCallClicker implements View.OnClickListener {
-//		public void onClick(View v) {
-//			Log.d("Call:","------------------------------>");
-//
-//			String number = "100";
-//			Intent intent = new Intent(Intent.ACTION_CALL);
-//			intent.setData(Uri.parse("tel:" +number));
-//			startActivity(intent);
-////			Toast.makeText(getApplicationContext(), "Call Function ", Toast.LENGTH_SHORT).show();
-//
-//		}
-//	}
-//
-//	class btnShareClicker implements View.OnClickListener {
-//		public void onClick(View v) {
-//			Log.d("Share:","------------------------------>");
-//			Toast.makeText(getApplicationContext(), "Share Function ", Toast.LENGTH_SHORT).show();
-//
-//		}
-//	}
-//
-//	class btnAddClicker implements View.OnClickListener {
-//		public void onClick(View v) {
-//			Log.d("Add:","------------------------------>");
-//			Toast.makeText(getApplicationContext(), "Add New Contact ", Toast.LENGTH_SHORT).show();
-//
-//		}
-//	}
 }
