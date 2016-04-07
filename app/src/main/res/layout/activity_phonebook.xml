@@ -28,7 +28,8 @@
         android:layout_weight="0.07"
         android:ems="10"
         android:hint="@string/usernameInput"
-        android:inputType="textPersonName"/>
+        android:inputType="textPersonName"
+        android:maxLength="20"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -44,7 +45,8 @@
         android:layout_weight="0.07"
         android:ems="10"
         android:hint="@string/userphoneinput"
-        android:inputType="phone"/>
+        android:inputType="phone"
+        android:maxLength="12"/>
 
     <TextView
         android:id="@+id/textView8"
@@ -60,7 +62,8 @@
         android:layout_weight="0.07"
         android:ems="10"
         android:hint="@string/useremailInput"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:maxLength="20"/>
 
     <TextView
         android:id="@+id/textView9"
@@ -76,7 +79,8 @@
         android:layout_weight="0.33"
         android:ems="10"
         android:hint="@string/useraddressInput"
-        android:inputType="textPostalAddress"/>
+        android:inputType="textPostalAddress"
+        android:maxLength="50"/>
 
     <TextView
         android:id="@+id/textView10"
@@ -90,7 +94,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
-        android:hint="@string/usernicknameInput"/>
+        android:hint="@string/usernicknameInput"
+        android:inputType="textPersonName"
+        android:maxLength="10"/>
 
     <Button
     android:id="@+id/saveButton"
@@ -114,16 +120,14 @@
             android:layout_width="54dp"
             android:layout_height="50dp"
             android:background="@drawable/phonecall"
-            android:onClick="call"/>
+            android:onClick="onClick"/>
 
-        <Button
-            android:id="@+id/buttonAdd"
-            android:layout_width="54dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/add"
-
-            />
+        <!--<Button-->
+        <!--android:id="@+id/buttonAdd"-->
+        <!--android:layout_width="54dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:background="@drawable/add"/>-->
 
         <Button
             android:id="@+id/buttonMessage"
@@ -131,13 +135,13 @@
             android:layout_height="52dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/message"
-            android:onClick="message"/>
+            android:onClick="onClick"/>
 
-        <Button
-            android:id="@+id/buttonShare"
-            android:layout_width="49dp"
-            android:layout_height="44dp"
-            android:background="@drawable/share"/>
+        <!--<Button-->
+            <!--android:id="@+id/buttonShare"-->
+            <!--android:layout_width="49dp"-->
+            <!--android:layout_height="44dp"-->
+            <!--android:background="@drawable/share"/>-->
     </TableRow>
 
 

@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class DBHelper extends SQLiteOpenHelper {
 
     //database columns
-    public static final String DATABASE_NAME = "TestDB.db";
+    public static final String DATABASE_NAME = "PhoneBookDB.db";
     public static final String CONTACTS_TABLE_NAME = "contacts";
     public static final String CONTACTS_COLUMN_ID = "id";
     public static final String CONTACTS_COLUMN_NAME = "name";
@@ -92,20 +92,33 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{Integer.toString(id)});
     }
 
-    public ArrayList<String> getAllContacts() {
+//    public ArrayList<String> getAllContacts() {
+//
+//        ArrayList<String> array_list = new ArrayList<String>();
+//
+//        hp = new HashMap();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor res = db.rawQuery("select * from contacts", null);
+//        res.moveToFirst();
+//
+//        while (!res.isAfterLast()) {
+//
+//            array_list.add(res.getString(res.getColumnIndex(CONTACTS_COLUMN_NAME)));
+//            res.moveToNext();
+//        }
+//        return array_list;
 
-        ArrayList<String> array_list = new ArrayList<String>();
-
-        hp = new HashMap();
+    //    }
+    public Cursor getAllContacts() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from contacts", null);
-        res.moveToFirst();
+        return res;
 
-        while (!res.isAfterLast()) {
-
-            array_list.add(res.getString(res.getColumnIndex(CONTACTS_COLUMN_NAME)));
-            res.moveToNext();
-        }
-        return array_list;
     }
+
+    public Cursor getSingleData(String id, SQLiteDatabase db) {
+        Cursor res = db.rawQuery("select * from contacts where id LIKE '" + id + "'", null);
+        return res;
+    }
+
 }

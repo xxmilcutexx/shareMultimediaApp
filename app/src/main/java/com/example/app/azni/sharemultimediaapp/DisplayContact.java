@@ -2,6 +2,7 @@ package com.example.app.azni.sharemultimediaapp;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +28,8 @@ public class DisplayContact extends AppCompatActivity {
     TextView name, phone, email, address, nickname;
     int id_To_Update = 0;
     CharSequence time;
+    String usrNo;
+    ListviewButtons listviewButtons;
     //    CharSequence cDate = DateFormat.getDateTimeInstance().format(new Date());
     //    int from_Where_I_Am_Coming = 0;
     private DBHelper mydb;
@@ -61,7 +64,8 @@ public class DisplayContact extends AppCompatActivity {
                 String addre = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_ADDRESS));
                 String nickna = rs.getString(rs.getColumnIndex(DBHelper.CONTACTS_COLUMN_NICKNAME));
 
-                Log.d("rs", rs.toString());
+                usrNo = phon;
+//                Log.d("rs", rs.toString());
 
                 if (!rs.isClosed()) {
                     rs.close();
@@ -98,29 +102,41 @@ public class DisplayContact extends AppCompatActivity {
                 bcall.setVisibility(View.VISIBLE);
                 Button bmessage = (Button) findViewById(R.id.buttonMessage);
                 bmessage.setVisibility(View.VISIBLE);
-                Button bshare = (Button) findViewById(R.id.buttonShare);
-                bshare.setVisibility(View.VISIBLE);
-                Button badd = (Button) findViewById(R.id.buttonAdd);
-                badd.setEnabled(false);
+//                Button bshare = (Button) findViewById(R.id.buttonShare);
+//                bshare.setVisibility(View.VISIBLE);
+//                Button badd = (Button) findViewById(R.id.buttonAdd);
+//                badd.setEnabled(false);
 
-                // TODO Message & Call Function by ID
-
-//                Time time = new Time();
-//                time.setToNow();
-//
-// String time = new SimpleDateFormat().format(new Date());
-//
-//                CharSequence cDate = DateFormat.getDateTimeInstance().format(new Date());
-
-//                Calendar c = Calendar.getInstance();
-//                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss a");
-//                String time = sdf.format(c.getTime());
-
-//                Toast.makeText(DisplayContact.this, "current time: " + time, Toast.LENGTH_SHORT).show();
-
-//                Toast.makeText(DisplayContact.this, "current contact number:" + " " + phon, Toast.LENGTH_SHORT).show();
 
             }
+        }
+    }
+
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.buttonCall:
+                Intent phn = new Intent(Intent.ACTION_CALL);
+                phn.setData(Uri.parse("tel:" + usrNo));
+
+                //if use sdkVersion 23, run this code to get permission
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) !=
+                        PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(this, new String[]
+                            {Manifest.permission.CALL_PHONE}, 0);
+                    return;
+                }
+                startActivity(phn);
+                break;
+            case R.id.buttonMessage:
+                Intent msg = new Intent(Intent.ACTION_SENDTO);
+                msg.setData(Uri.parse("smsto:" + usrNo));
+                msg.putExtra("sms_body", "The sms text");
+                startActivity(msg);
+                break;
+            default:
+                break;
         }
     }
 
@@ -154,10 +170,10 @@ public class DisplayContact extends AppCompatActivity {
                 bcall.setVisibility(View.INVISIBLE);
                 Button bmessage = (Button) findViewById(R.id.buttonMessage);
                 bmessage.setVisibility(View.INVISIBLE);
-                Button bshare = (Button) findViewById(R.id.buttonShare);
-                bshare.setVisibility(View.INVISIBLE);
-                Button badd = (Button) findViewById(R.id.buttonAdd);
-                badd.setVisibility(View.INVISIBLE);
+//                Button bshare = (Button) findViewById(R.id.buttonShare);
+//                bshare.setVisibility(View.INVISIBLE);
+//                Button badd = (Button) findViewById(R.id.buttonAdd);
+//                badd.setVisibility(View.INVISIBLE);
 
 
                 name.setEnabled(true);
@@ -238,30 +254,32 @@ public class DisplayContact extends AppCompatActivity {
         }
     }
 
-    public void call(View v) {
-        String number = "100";
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + number));
+//    public void call(View v) {
 
-        //if use sdkVersion 23, run this code to get permission
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]
-                    {Manifest.permission.CALL_PHONE}, 0);
-            return;
-        }
-        startActivity(intent);
-//        Log.d("Invoke call maethod", "entered!!");
-    }
+////        String number = "100";
+//        Intent intent = new Intent(Intent.ACTION_CALL);
+//        intent.setData(Uri.parse("tel:" + usrNo));
+//
+//        //if use sdkVersion 23, run this code to get permission
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) !=
+//                PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]
+//                    {Manifest.permission.CALL_PHONE}, 0);
+//            return;
+//        }
+//        startActivity(intent);
+////        Log.d("Invoke call method", "entered!!");
+//    }
 
     //message method
-    public void message(View v) {
-        //get v
+//    public void message(View v) {
+    //get v
 //        Toast.makeText(DisplayContact.this, "value of v: " + " " + v, Toast.LENGTH_SHORT).show();
-        String number = "100";
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("smsto:" + number));
-        intent.putExtra("sms_body", "The sms text");
-        startActivity(intent);
-    }
+//        String number = "100";
+//        Intent intent = new Intent(Intent.ACTION_SENDTO);
+//        intent.setData(Uri.parse("smsto:" + usrNo));
+//        intent.putExtra("sms_body", "The sms text");
+//        startActivity(intent);
+//    }
+
 }
